@@ -18,7 +18,9 @@ Policy pack and search API for the iPe onboarding copilot. ONB still decides fie
 | `corpus/handbook/` | Reviewer handbook |
 | `corpus/not-in-force/` | Rejected drafts — discard if retrieved |
 
-`copilot-svc` calls this service over HTTP (`CORPUS_SEARCH_URL` + Bearer `CORPUS_API_KEY`). It does not vendor the pack.
+`copilot-svc` is the only caller. It uses HTTP (`CORPUS_SEARCH_URL` + Bearer `CORPUS_API_KEY`) and does not vendor the pack. The HLD and the 71-shop gold set are in [analysis](https://github.com/Capstone-iPe/analysis). This service does not decide a field, a file, or the verdict.
+
+The live index is hybrid retrieval at 800 tokens with 120 overlap (1,446 chunks). A reranker was measured and is not deployed. Recall on the 24-question set: hit@4 = 0.958, hit@8 = 1.0.
 
 ## Clone
 
