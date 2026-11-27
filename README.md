@@ -46,10 +46,19 @@ cp .env.example .env
 
 ## Setup
 
+Python 3.12. The search API has no database. Building the index calls the hosted embeddings API, so it needs a network path to `https://103.42.50.41:1035/v1`, `EMBEDDINGS_API_KEY`, and `vm02-ca.crt`.
+
 ```bash
-python3 -m venv .venv
+git clone https://github.com/Capstone-iPe/onb-corpus.git
+cd onb-corpus
+python3.12 -m venv .venv
 .venv/bin/pip install -r requirements.txt
+cp .env.example .env
 ```
+
+Put `vm02-ca.crt` in this directory. Choose `CORPUS_API_KEY` yourself (`python3 -c "import secrets; print(secrets.token_hex(32))"`) and copy that same value into copilot-svc. Fill `EMBEDDINGS_API_KEY`. Leave `EMBEDDINGS_CA_CERT=vm02-ca.crt`.
+
+The copilot, ONB, and the website are separate repositories. Start this API first, on port 8081, then ONB on 8000, the copilot on 8080, and the website on 5000. The [analysis README](https://github.com/Capstone-iPe/analysis#run-the-services-locally) is the full local runbook.
 
 ## Build the index
 
